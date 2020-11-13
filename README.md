@@ -5,7 +5,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Prerequisites
 
 NodeJs & npm installed
+
 Angular installed
+
 Angular CLI installed (optional but recommended)
 
 ## Development server
