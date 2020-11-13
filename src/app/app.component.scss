@@ -1,0 +1,22 @@
+#globalContainer {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+}
+
+.sideBar {
+  width: 20%;
+}
+
+.centralContainer {
+  width: 60%;
+
+  &>.searchBarContainer {
+    height: 12rem;
+  }
+
+  &>.videoViewContainer {
+    height: auto;
+  }
+}
