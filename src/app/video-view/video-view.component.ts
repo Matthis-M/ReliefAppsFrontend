@@ -9,9 +9,9 @@ import { DatabaseLinkService } from '../database-link.service';
 })
 export class VideoViewComponent implements OnInit {
   youtubeUrlRegexp = new RegExp(
-    '^https?:\\/\\/(w{3}\\.)?youtube\\.com\\/watch\\?v=([A-Za-z0-9]{11})'
+    '^https?:\\/\\/(w{3}\\.)?youtube\\.com\\/watch\\?v=([A-Za-z0-9_-]{11})'
   );
-  videoIdRegexp = new RegExp('watch\\?v=([A-Za-z0-9]{11})');
+  videoIdRegexp = new RegExp('watch\\?v=([A-Za-z0-9_-]{11})');
 
   videoRatio = 9 / 16;
   videoPlayer;
@@ -42,7 +42,7 @@ export class VideoViewComponent implements OnInit {
       );
     } else {
       window.alert(
-        'The Youtube URL entered is invalid, please try again with a valid one'
+        "The Youtube URL entered is invalid, please try again with a valid one.\nIt should be similar to this : 'https://www.youtube.com/watch?v=AYRwF3SCalU'"
       );
     }
   }
