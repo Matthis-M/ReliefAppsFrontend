@@ -1,27 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-video-view',
   templateUrl: './video-view.component.html',
-  styleUrls: ['./video-view.component.scss']
+  styleUrls: ['./video-view.component.scss'],
 })
 export class VideoViewComponent implements OnInit {
+  sanitizer
   videoPlayer;
   videoRatio;
-  videoPlayerControl;
+  videoSource;
 
-  constructor() {}
+  constructor(private domSanitizer: DomSanitizer) {
+    this.videoRatio = 9 / 16;
+
+    this.sanitizer = domSanitizer;
+    this.videoSource = this.sanitizer.bypassSecurityTrustResourceUrl(
+      'http://www.youtube.com/embed/9NK35FGIBjo'
+    );
+  }
 
   ngOnInit(): void {
     this.videoPlayer = document.getElementById('videoPlayer');
-    this.videoRatio = 9 / 16;
-
     this.setVideoHeight();
-    this.initVideo();
-  }
-
-  private initVideo() {
-    //window.videoPlayerControl.loadVideoById('iHCE8SVxbBM', 5, 'large');
   }
 
   private setVideoHeight() {

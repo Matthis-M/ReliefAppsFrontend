@@ -9,37 +9,5 @@
   </head>
   <body>
     <app-root></app-root>
-
-    <!--
-      Sorry for the hacky script tag here, I don't think there's a much better option here given that
-      initializing the iFrame in the component's TS file doesn't works, and you can't put a script tag
-      inside the component's html file...
-    -->
-
-    <script src="https://www.youtube.com/iframe_api"></script>
-
-    <script>
-      var player;
-
-      function onYouTubeIframeAPIReady() {
-        player = new YT.Player("videoPlayer", {
-          events: {
-            onReady: onPlayerReady,
-          },
-        });
-      }
-
-      function onPlayerReady(event) {
-        window.videoPlayerControl = event.target;
-
-        event.target.playVideo();
-
-        player.loadVideoById("2Vx8TDX6VVA", 5, "large");
-      }
-    </script>
-
-    <!--
-      End of the hacky script tag, sorry again... That's the price for not using Angular librairies
-    -->
   </body>
 </html>
