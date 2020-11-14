@@ -8,34 +8,42 @@ import { DatabaseLinkService } from '../database-link.service';
   styleUrls: ['./video-view.component.scss'],
 })
 export class VideoViewComponent implements OnInit {
-  sanitizer
+  youtubeUrlRegexp = new RegExp(
+    '^https?:\\/\\/(w{3}\\.)?youtube\\.com\\/watch\\?v=([A-Za-z0-9]{11})'
+  );
+  videoIdRegexp = new RegExp('watch\\?v=([A-Za-z0-9]{11})');
+
+  videoRatio = 9 / 16;
   videoPlayer;
-  videoRatio;
   videoSource;
 
-  constructor(private domSanitizer: DomSanitizer, private databaseLinkService : DatabaseLinkService) {
-    this.videoRatio = 9 / 16;
-
-    this.videoSource = this.domSanitizer.bypassSecurityTrustResourceUrl(
-      'http://www.youtube.com/embed/9NK35FGIBjo'
-    );
-  }
+  constructor(
+    private domSanitizer: DomSanitizer,
+    private databaseLinkService: DatabaseLinkService
+  ) {}
 
   ngOnInit(): void {
+    this.loadVideo('http://youtube.com/watch?v=NYWzJrY3JPw');
     this.videoPlayer = document.getElementById('videoPlayer');
     this.setVideoHeight();
   }
 
   private setVideoHeight() {
-    console.log('resize happening');
-
     const currentWidth = this.videoPlayer.offsetWidth;
     const newHeight = Math.round(currentWidth * this.videoRatio) + 'px';
     this.videoPlayer.style.height = newHeight;
   }
 
-  public loadVideo (newVideoUrl: string) {
-    newVideoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(newVideoUrl);
-    this.videoSource = newVideoUrl;
+  public loadVideo(newVideoUrl: string) {
+    if (this.youtubeUrlRegexp.test(newVideoUrl)) {
+      const videoId = this.videoIdRegexp.exec(newVideoUrl)[1];
+      this.videoSource = this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'http://www.youtube.com/embed/' + videoId
+      );
+    } else {
+      window.alert(
+        'The Youtube URL entered is invalid, please try again with a valid one'
+      );
+    }
   }
 }
