@@ -1,3 +1,6 @@
-* {
-    background: blue;
+@import '../../variables.scss';
+
+.searchBar {
+  margin: $medium-spacing;
+  width: 80%;
 }
