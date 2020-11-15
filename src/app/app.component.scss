@@ -1,22 +1,24 @@
+@import "../assets/variables.scss";
+
 #globalContainer {
   display: flex;
-  margin: 0;
-  padding: 0;
   width: 100vw;
-}
 
-.sideBar {
-  width: 20%;
-}
-
-.centralContainer {
-  width: 60%;
-
-  &>.searchBarContainer {
-    height: 12rem;
+  .centralContainer {
+    width: 50%;
   }
 
-  &>.videoViewContainer {
-    height: auto;
+  .sideBar {
+    background: $medium-grey;
+    border-radius: $border-radius;
+    margin: 32px;
+    overflow: hidden;
+    width: 25%;
+  }
+
+  .reliefApplicationsLogo {
+    display: block;
+    height: 100px;
+    margin: auto;
   }
 }

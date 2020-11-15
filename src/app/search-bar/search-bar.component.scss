@@ -1,3 +1,9 @@
-* {
-    background: blue;
+@import "../../assets/variables.scss";
+
+.searchBar {
+  font-size: 16px;
+  height: 42px;
+  margin: 2% 10%;
+  text-align: center;
+  width: 80%;
 }
