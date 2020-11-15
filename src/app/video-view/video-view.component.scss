@@ -1,3 +1,7 @@
+@import "../../assets/variables.scss";
+
 #videoPlayer {
+  border-radius: $border-radius;
+  overflow: hidden;
   width: 100%;
 }

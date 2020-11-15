@@ -1,3 +1,11 @@
-<ul>
-  <li *ngFor="let videoUrl of historyList.reverse()" (click)="userClick(videoUrl)">{{ videoUrl }}</li>
+<h2 class="historyTitle">History</h2>
+
+<ul class="historyList customList">
+  <li
+    class="historyEntry"
+    *ngFor="let videoUrl of historyList.reverse()"
+    (click)="userClick(videoUrl)"
+  >
+    {{ videoUrl }}
+  </li>
 </ul>

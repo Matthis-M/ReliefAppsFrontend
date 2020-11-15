@@ -1,5 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import "assets/variables.scss";
+
 body {
+  background: $dark-grey;
+  font-family: Roboto-Regular, Roboto, sans-serif;
   margin: 0;
+}
+
+.customList {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+
+  & > * {
+    background: white;
+    border-radius: $border-radius;
+    display: inline-block;
+    font-size: 14px;
+    margin: 8px auto;
+    padding: 4px 8px;
+    transition: 250ms;
+
+    &:hover {
+      cursor: pointer;
+      background: $light-red;
+      font-size: 15px;
+    }
+  }
+}
+
+.topContainer {
+  background: $light-grey;
+  height: 100px;
+  margin-bottom: 12px;
+  padding: 12px 24px;
+
+  #bookmarksNumberIndicator {
+    text-align: center;
+  }
 }

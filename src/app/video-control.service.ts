@@ -17,16 +17,9 @@ export class VideoControlService {
 
   videoSource$ = this.videoSourceSource.asObservable();
 
-
-
   constructor(private domSanitizer: DomSanitizer) {}
 
-
-
   public loadVideo(newVideoUrl: string, writeHistory: boolean) {
-
-    console.log(newVideoUrl);
-
     const videoUrlValidationResult = this.videoIdRegexp.exec(newVideoUrl);
 
     if (videoUrlValidationResult) {
@@ -35,13 +28,12 @@ export class VideoControlService {
         'http://www.youtube.com/embed/' + videoId
       );
 
-      if(writeHistory) {
+      if (writeHistory) {
         this.lastEntryVideo = newVideoUrl;
       } else {
         this.lastEntryVideo = '';
       }
       this.videoSourceSource.next(safeNewVideoUrl);
-      
     } else {
       window.alert(
         "The chosen Youtube URL is invalid, please try again with a valid one.\nIt should be similar to this : 'https://www.youtube.com/watch?v=AYRwF3SCalU'"

@@ -1,3 +1,8 @@
-* {
-    background:green;
+@import "../../assets/variables.scss";
+
+.historyTitle {
+  color: white;
+  font-weight: normal;
+  margin: 24px auto;
+  text-align: center;
 }

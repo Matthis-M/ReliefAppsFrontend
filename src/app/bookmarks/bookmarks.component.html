@@ -1,11 +1,21 @@
-<button id="addToFavoritesButton" (click)="addToBookmarks()">Add to Bookmarks !</button>
+<div class="topContainer">
+  <p id="bookmarksNumberIndicator">{{ numberOfBookmarks }} bookmarks saved !</p>
 
-<p id="bookmarksNumberIndicator">{{numberOfBookmarks}} bookmarks saved !</p>
+  <button id="addToFavoritesButton" (click)="addToBookmarks()">
+    Add to Bookmarks
+  </button>
+</div>
 
-<button id="toggleBookmarksButton" (click)="toggleBookmarks()">{{toggleButtonText}}</button>
+<button id="toggleBookmarksButton" (click)="toggleBookmarks()">
+  {{ toggleButtonText }}
+</button>
 
-<ul id="bookmarksList">
-  <li *ngFor="let videoUrl of bookmarksList" (click)="userClick(videoUrl)">
+<ul id="bookmarksList" class="customList">
+  <li
+    class="bookmark"
+    *ngFor="let videoUrl of bookmarksList"
+    (click)="userClick(videoUrl)"
+  >
     {{ videoUrl }}
   </li>
 </ul>

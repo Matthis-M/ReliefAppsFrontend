@@ -19,7 +19,6 @@ export class DatabaseLinkService {
       'https://www.youtube.com/watch?v=god7hAPv8f0',
       'https://www.youtube.com/watch?v=ezswBxBZhBc',
       'https://www.youtube.com/watch?v=I2dfGC1oziE',
-      'wrongUrlTest',
     ];
 
     this.mockBookmarksSource.next(mockBookmarks);
@@ -46,13 +45,11 @@ export class DatabaseLinkService {
   }
 
   public addToHistory(videoUrl: string) {
-
     const currentHistory = this.mockHistorySource.getValue();
 
-    const previousLastEntry = currentHistory[(currentHistory.length-1)];
+    const previousLastEntry = currentHistory[currentHistory.length - 1];
 
     if (videoUrl && previousLastEntry !== videoUrl) {
-
       console.log('URL : ' + videoUrl + ' has been added to history');
       //make the API call
 
