@@ -12,19 +12,28 @@ export class BookmarksComponent implements OnInit {
 
   constructor(dataBaseLinkService: DatabaseLinkService) {
     this.databaseLink = dataBaseLinkService;
+
+    this.databaseLink.mockBookmarks$.subscribe((newBookmarks) => {
+      this.refreshBookmarks(newBookmarks);
+    });
   }
 
   @Output() LoadVideoRequest = new EventEmitter<string>();
+  @Output() AddToBookmarksRequest = new EventEmitter<any>();
 
   ngOnInit(): void {
-    this.fetchBookmarks();
+    this.databaseLink.fetchBookmarks();
   }
 
   userClick(videoUrl: string) {
     this.LoadVideoRequest.emit(videoUrl);
   }
 
-  private fetchBookmarks() {
-    this.bookmarksList = this.databaseLink.listBookmarks();
+  addToBookmarks() {
+    console.log("user wants to add current video to  bookmarks");
+  }
+
+  refreshBookmarks(newBookmarks: string[]) {
+    this.bookmarksList = newBookmarks;
   }
 }

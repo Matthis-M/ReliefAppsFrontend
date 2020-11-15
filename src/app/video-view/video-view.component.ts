@@ -8,14 +8,14 @@ import { DatabaseLinkService } from '../database-link.service';
   styleUrls: ['./video-view.component.scss'],
 })
 export class VideoViewComponent implements OnInit {
-  youtubeUrlRegexp = new RegExp(
+  private youtubeUrlRegexp = new RegExp(
     '^https?:\\/\\/(w{3}\\.)?youtube\\.com\\/watch\\?v=([A-Za-z0-9_-]{11})'
   );
-  videoIdRegexp = new RegExp('watch\\?v=([A-Za-z0-9_-]{11})');
+  private videoIdRegexp = new RegExp('watch\\?v=([A-Za-z0-9_-]{11})');
 
-  videoRatio = 9 / 16;
-  videoPlayer;
-  videoSource;
+  private videoRatio = 9 / 16;
+  private videoPlayer;
+  private videoSource;
 
   constructor(
     private domSanitizer: DomSanitizer,
@@ -45,5 +45,9 @@ export class VideoViewComponent implements OnInit {
         "The chosen Youtube URL is invalid, please try again with a valid one.\nIt should be similar to this : 'https://www.youtube.com/watch?v=AYRwF3SCalU'"
       );
     }
+  }
+
+  public getVideoSource() {
+    return this.videoSource;
   }
 }

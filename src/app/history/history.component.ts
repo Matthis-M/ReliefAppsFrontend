@@ -12,19 +12,23 @@ export class HistoryComponent implements OnInit {
 
   constructor(databaseLinkService: DatabaseLinkService) {
     this.databaseLink = databaseLinkService;
+
+    this.databaseLink.mockHistory$.subscribe((newHistory) => {
+      this.refreshHistory(newHistory);
+    });
   }
 
   @Output() LoadVideoRequest = new EventEmitter<string>();
 
   ngOnInit(): void {
-    this.fetchHistory();
+    this.databaseLink.fetchHistory();
   }
 
   userClick(videoUrl: string) {
     this.LoadVideoRequest.emit(videoUrl);
   }
 
-  private fetchHistory() {
-    this.historyList = this.databaseLink.listHistory();
+  refreshHistory(newHistory: string[]) {
+    this.historyList = newHistory;
   }
 }
