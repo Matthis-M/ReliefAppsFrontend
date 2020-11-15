@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { DatabaseLinkService } from '../database-link.service';
 
 @Component({
   selector: 'app-bookmarks',
@@ -6,13 +7,24 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./bookmarks.component.scss'],
 })
 export class BookmarksComponent implements OnInit {
-  constructor() {}
+  databaseLink;
+  bookmarksList = [];
+
+  constructor(dataBaseLinkService: DatabaseLinkService) {
+    this.databaseLink = dataBaseLinkService;
+  }
 
   @Output() LoadVideoRequest = new EventEmitter<string>();
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.fetchBookmarks();
+  }
 
-  clicked() {
-    this.LoadVideoRequest.emit('https://www.youtube.com/watch?v=fdixQDPA2h0');
+  userClick(videoUrl: string) {
+    this.LoadVideoRequest.emit(videoUrl);
+  }
+
+  private fetchBookmarks() {
+    this.bookmarksList = this.databaseLink.listBookmarks();
   }
 }

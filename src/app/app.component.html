@@ -1,5 +1,5 @@
 <div id="globalContainer">
-  <app-history class="historyContainer sideBar"></app-history>
+  <app-history (LoadVideoRequest)="loadVideo($event)" class="historyContainer sideBar"></app-history>
   <div class="centralContainer">
     <app-search-bar (LoadVideoRequest)="loadVideo($event)" class="searchBarContainer"></app-search-bar>
     <app-video-view class="videoViewContainer"></app-video-view>

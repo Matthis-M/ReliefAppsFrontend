@@ -1,2 +1,6 @@
-<p>bookmarks works!</p>
-<input type="button" (click)="clicked()" />
+
+<button>Add to Bookmarks !</button>
+
+<ul>
+  <li *ngFor="let videoUrl of bookmarksList" (click)="userClick(videoUrl)">{{ videoUrl }}</li>
+</ul>

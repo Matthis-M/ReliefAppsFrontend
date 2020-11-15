@@ -42,7 +42,7 @@ export class VideoViewComponent implements OnInit {
       );
     } else {
       window.alert(
-        "The Youtube URL entered is invalid, please try again with a valid one.\nIt should be similar to this : 'https://www.youtube.com/watch?v=AYRwF3SCalU'"
+        "The chosen Youtube URL is invalid, please try again with a valid one.\nIt should be similar to this : 'https://www.youtube.com/watch?v=AYRwF3SCalU'"
       );
     }
   }
