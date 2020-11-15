@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DatabaseLinkService } from '../database-link.service';
+import { VideoControlService } from '../video-control.service';
 
 @Component({
   selector: 'app-history',
@@ -7,28 +8,36 @@ import { DatabaseLinkService } from '../database-link.service';
   styleUrls: ['./history.component.scss'],
 })
 export class HistoryComponent implements OnInit {
-  databaseLink;
+  private videoControl: VideoControlService;
+  private databaseLink: DatabaseLinkService;
   historyList = [];
 
-  constructor(databaseLinkService: DatabaseLinkService) {
+  constructor(databaseLinkService: DatabaseLinkService, videoControlService: VideoControlService) {
     this.databaseLink = databaseLinkService;
+    this.videoControl = videoControlService;
 
     this.databaseLink.mockHistory$.subscribe((newHistory) => {
       this.refreshHistory(newHistory);
     });
-  }
 
-  @Output() LoadVideoRequest = new EventEmitter<string>();
+    this.videoControl.videoSource$.subscribe((newSource) => {
+      this.addToHistory(this.videoControl.getVideoSource());
+    });
+  }
 
   ngOnInit(): void {
     this.databaseLink.fetchHistory();
   }
 
   userClick(videoUrl: string) {
-    this.LoadVideoRequest.emit(videoUrl);
+    this.videoControl.loadVideo(videoUrl, false);
   }
 
   refreshHistory(newHistory: string[]) {
     this.historyList = newHistory;
+  }
+
+  addToHistory(newEntry) {
+    this.databaseLink.addToHistory(newEntry);
   }
 }

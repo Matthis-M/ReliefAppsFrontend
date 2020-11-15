@@ -1,15 +1,13 @@
-import { EventEmitter, Injectable, Output } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DatabaseLinkService {
-  // Observable string sources
-  private mockHistorySource = new Subject<string[]>();
+  private mockHistorySource = new BehaviorSubject<string[]>([]);
   private mockBookmarksSource = new Subject<string[]>();
 
-  // Observable string streams
   mockHistory$ = this.mockHistorySource.asObservable();
   mockBookmarks$ = this.mockBookmarksSource.asObservable();
 
@@ -28,10 +26,12 @@ export class DatabaseLinkService {
   }
 
   public addToBookmarks(videoUrl: string) {
-    console.log('URL : ' + videoUrl + ' has been added to bookmarks');
-    //make the API call
+    if (videoUrl) {
+      console.log('URL : ' + videoUrl + ' has been added to bookmarks');
+      //make the API call
 
-    this.fetchBookmarks();
+      this.fetchBookmarks();
+    }
   }
 
   public fetchHistory() {
@@ -46,9 +46,19 @@ export class DatabaseLinkService {
   }
 
   public addToHistory(videoUrl: string) {
-    console.log('URL : ' + videoUrl + ' has been added to history');
-    //make the API call
 
-    this.fetchHistory();
+    const currentHistory = this.mockHistorySource.getValue();
+
+    const previousLastEntry = currentHistory[(currentHistory.length-1)];
+
+    if (videoUrl && previousLastEntry !== videoUrl) {
+
+      console.log('URL : ' + videoUrl + ' has been added to history');
+      //make the API call
+
+      currentHistory.push(videoUrl);
+
+      this.mockHistorySource.next(currentHistory);
+    }
   }
 }

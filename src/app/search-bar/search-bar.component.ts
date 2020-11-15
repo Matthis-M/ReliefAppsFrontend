@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { VideoControlService } from '../video-control.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -6,13 +7,15 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./search-bar.component.scss'],
 })
 export class SearchBarComponent implements OnInit {
-  constructor() {}
+  private videoControl: VideoControlService;
+
+  constructor(videoControlService: VideoControlService) {
+    this.videoControl = videoControlService;
+  }
 
   ngOnInit(): void {}
 
-  @Output() LoadVideoRequest = new EventEmitter<string>();
-
   onEnter(userInput: string) {
-    this.LoadVideoRequest.emit(userInput);
+    this.videoControl.loadVideo(userInput, true);
   }
 }

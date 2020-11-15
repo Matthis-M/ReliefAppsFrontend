@@ -1,10 +1,10 @@
 <div id="globalContainer">
-  <app-history (LoadVideoRequest)="loadVideo($event)" class="historyContainer sideBar"></app-history>
+  <app-history class="historyContainer sideBar"></app-history>
   <div class="centralContainer">
-    <app-search-bar (LoadVideoRequest)="loadVideo($event)" class="searchBarContainer"></app-search-bar>
+    <app-search-bar class="searchBarContainer"></app-search-bar>
     <app-video-view class="videoViewContainer"></app-video-view>
   </div>
-  <app-bookmarks (LoadVideoRequest)="loadVideo($event)" class="bookmarksContainer sideBar"></app-bookmarks>
+  <app-bookmarks class="bookmarksContainer sideBar"></app-bookmarks>
 </div>
 
 <router-outlet></router-outlet>
