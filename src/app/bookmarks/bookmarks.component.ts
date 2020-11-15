@@ -8,9 +8,9 @@ import { VideoControlService } from '../video-control.service';
   styleUrls: ['./bookmarks.component.scss'],
 })
 export class BookmarksComponent implements OnInit {
-  toggleButtonText = "Show bookmarks";
+  toggleButtonText = 'Show bookmarks';
   numberOfBookmarks;
-  private bookmarksListSelector = "bookmarksList"
+  private bookmarksListSelector = 'bookmarksList';
   private videoControl: VideoControlService;
   private databaseLink: DatabaseLinkService;
   bookmarksList = [];
@@ -50,7 +50,9 @@ export class BookmarksComponent implements OnInit {
   toggleBookmarks() {
     const bookmarksList = document.getElementById(this.bookmarksListSelector);
 
-    bookmarksList.classList.toggle("open");
-    (this.toggleButtonText === "Show bookmarks") ? (this.toggleButtonText = "Hide bookmarks") : (this.toggleButtonText = "Show bookmarks")
+    bookmarksList.classList.toggle('open');
+    this.toggleButtonText === 'Show bookmarks'
+      ? (this.toggleButtonText = 'Hide bookmarks')
+      : (this.toggleButtonText = 'Show bookmarks');
   }
 }

@@ -12,7 +12,10 @@ export class HistoryComponent implements OnInit {
   private databaseLink: DatabaseLinkService;
   historyList = [];
 
-  constructor(databaseLinkService: DatabaseLinkService, videoControlService: VideoControlService) {
+  constructor(
+    databaseLinkService: DatabaseLinkService,
+    videoControlService: VideoControlService
+  ) {
     this.databaseLink = databaseLinkService;
     this.videoControl = videoControlService;
 
