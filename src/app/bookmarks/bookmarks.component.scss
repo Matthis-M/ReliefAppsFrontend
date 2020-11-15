@@ -1,3 +1,14 @@
 * {
     background: purple;
 }
+
+#bookmarksList {
+    max-height: 0;
+    transition: 250ms;
+    overflow: hidden;
+    overflow-y: scroll;
+
+    &.open {
+        max-height: 100vh;
+    }
+}
