@@ -18,7 +18,17 @@
 }
 
 .clearAllButton {
+  animation: 250ms;
+  background: white;
+  border: 1px solid $light-red;
   bottom: 20px;
+  color: $light-red;
   position: absolute;
   right: 20px;
+
+  &:hover {
+    background: $light-red;
+    border-color: white;
+    color: white;
+  }
 }
