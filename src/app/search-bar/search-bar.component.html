@@ -1,6 +1,13 @@
-<input
-  class="searchBar"
-  type="search"
-  placeholder="Please paste the link of the Youtube video you're looking for, then press Enter"
-  (keyup.enter)="onEnter($event.target.value)"
-/>
+<div class="searchContainer">
+  <input
+    #userInput
+    class="searchBar"
+    type="search"
+    placeholder="Paste here the link of the Youtube video you're looking for"
+    (keyup.enter)="loadVideo(userInput.value)"
+  />
+
+  <button class="searchButton" (click)="loadVideo(userInput.value)">
+    Submit
+  </button>
+</div>

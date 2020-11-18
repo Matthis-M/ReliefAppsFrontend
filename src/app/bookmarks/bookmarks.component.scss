@@ -1,22 +1,6 @@
 @import "../../assets/variables.scss";
 
-button {
-  background-color: $light-red;
-  border-radius: $border-radius;
-  border: none;
-  color: white;
-  display: block;
-  font-size: 20px;
-  margin: 0 auto;
-  padding: 2px 8px;
-  transition: 250ms;
 
-  &:hover {
-    cursor: pointer;
-    background: white;
-    color: $dark-grey;
-  }
-}
 
 #toggleBookmarksButton {
   margin: 24px auto;
@@ -30,5 +14,21 @@ button {
 
   &.open {
     max-height: 100vh;
+  }
+}
+
+.clearAllButton {
+  animation: 250ms;
+  background: white;
+  border: 1px solid $light-red;
+  bottom: 20px;
+  color: $light-red;
+  position: absolute;
+  right: 20px;
+
+  &:hover {
+    background: $light-red;
+    border-color: white;
+    color: white;
   }
 }

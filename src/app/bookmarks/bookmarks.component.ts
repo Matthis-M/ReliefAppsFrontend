@@ -8,11 +8,10 @@ import { VideoControlService } from '../video-control.service';
   styleUrls: ['./bookmarks.component.scss'],
 })
 export class BookmarksComponent implements OnInit {
-
   private bookmarksListSelector = 'bookmarksList';
   private videoControl: VideoControlService;
   private databaseLink: DatabaseLinkService;
-  
+
   public toggleButtonText = 'Show bookmarks';
   public numberOfBookmarks: number;
   public bookmarksList = [];
@@ -54,5 +53,12 @@ export class BookmarksComponent implements OnInit {
     this.toggleButtonText === 'Show bookmarks'
       ? (this.toggleButtonText = 'Hide bookmarks')
       : (this.toggleButtonText = 'Show bookmarks');
+  }
+
+  clearAll() {
+    const choice = window.confirm(
+      'Do you really want to reset History and Bookmarks ? This action is irreversible'
+    );
+    this.databaseLink.clearAll();
   }
 }
