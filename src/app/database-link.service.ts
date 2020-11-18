@@ -1,61 +1,104 @@
+import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DatabaseLinkService {
-  private mockHistorySource = new BehaviorSubject<string[]>([]);
-  private mockBookmarksSource = new Subject<string[]>();
+  private HistorySource = new BehaviorSubject<string[]>([]);
+  private BookmarksSource = new BehaviorSubject<string[]>([]);
 
-  mockHistory$ = this.mockHistorySource.asObservable();
-  mockBookmarks$ = this.mockBookmarksSource.asObservable();
+  History$ = this.HistorySource.asObservable();
+  Bookmarks$ = this.BookmarksSource.asObservable();
 
-  constructor() {}
+  private bookmarksEndpoint = 'https://127.0.0.1:8000/bookmarks';
+  private historyEndpoint = 'https://127.0.0.1:8000/history';
 
-  public fetchBookmarks() {
-    //Make the API call to DB
-    const mockBookmarks = [
-      'https://www.youtube.com/watch?v=god7hAPv8f0',
-      'https://www.youtube.com/watch?v=ezswBxBZhBc',
-      'https://www.youtube.com/watch?v=I2dfGC1oziE',
-    ];
+  constructor(private httpClient: HttpClient) {
+    this.fetchBookmarks();
+    this.fetchHistory();
+  }
 
-    this.mockBookmarksSource.next(mockBookmarks);
+  public async fetchBookmarks() {
+    const request = this.httpClient.get(this.bookmarksEndpoint);
+    request.subscribe(
+      (response: string) => {
+        const updatedBookmarks = JSON.parse(response);
+        this.BookmarksSource.next(updatedBookmarks);
+      },
+      (error) => {
+        console.log(
+          'error: impossible to fetch data from "' +
+            this.bookmarksEndpoint +
+            '". Check the following error message for more information. Maybe try to reboot the server or check the CORS parameters.'
+        );
+        console.log(error);
+      }
+    );
   }
 
   public addToBookmarks(videoUrl: string) {
-    if (videoUrl) {
-      console.log('URL : ' + videoUrl + ' has been added to bookmarks');
-      //make the API call
+    const isAlreadyBookmarked = this.BookmarksSource.getValue().find(
+      (url) => url === videoUrl
+    );
 
-      this.fetchBookmarks();
+    if (isAlreadyBookmarked) {
+      alert('This video is already bookmarked !');
+
+      return;
+    }
+
+    if (videoUrl) {
+      const JsonData = {
+        videoUrl: videoUrl,
+      };
+
+      this.httpClient.post(this.bookmarksEndpoint, JsonData).subscribe(
+        (response: string) => {
+          console.log(response);
+        },
+        () => {
+          this.fetchBookmarks();
+        }
+      );
     }
   }
 
-  public fetchHistory() {
-    //Make the API call to DB
-    const mockHistory = [
-      'https://www.youtube.com/watch?v=G9RA5v9Hy44',
-      'https://www.youtube.com/watch?v=QD3Y40K-2-M',
-      'https://www.youtube.com/watch?v=yoJ3nHNep-s',
-    ];
-
-    this.mockHistorySource.next(mockHistory);
+  public async fetchHistory() {
+    const request = this.httpClient.get(this.historyEndpoint);
+    request.subscribe(
+      (response: string) => {
+        const updatedHistory = JSON.parse(response);
+        this.HistorySource.next(updatedHistory);
+      },
+      (error) => {
+        console.log(
+          'error during the api call to "' +
+            this.historyEndpoint +
+            '". Check the following error message for more informations. Maybe check your CORS parameters.'
+        );
+        console.log(error);
+      }
+    );
   }
 
   public addToHistory(videoUrl: string) {
-    const currentHistory = this.mockHistorySource.getValue();
+    this.fetchHistory();
 
-    const previousLastEntry = currentHistory[currentHistory.length - 1];
+    if (videoUrl) {
+      const JsonData = {
+        videoUrl: videoUrl,
+      };
 
-    if (videoUrl && previousLastEntry !== videoUrl) {
-      console.log('URL : ' + videoUrl + ' has been added to history');
-      //make the API call
-
-      currentHistory.push(videoUrl);
-
-      this.mockHistorySource.next(currentHistory);
+      this.httpClient.post(this.historyEndpoint, JsonData).subscribe(
+        (response: string) => {
+          console.log(response);
+        },
+        () => {
+          this.fetchHistory();
+        }
+      );
     }
   }
 }

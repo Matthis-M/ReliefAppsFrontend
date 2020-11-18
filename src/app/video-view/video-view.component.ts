@@ -25,10 +25,7 @@ export class VideoViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.videoControl.loadVideo(
-      'https://www.youtube.com/watch?v=AYRwF3SCalU',
-      false
-    );
+    this.videoControl.loadVideo(this.videoControl.defaultVideo);
     this.videoPlayer = document.getElementById('videoPlayer');
     this.setVideoHeight();
   }

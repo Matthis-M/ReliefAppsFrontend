@@ -22,7 +22,7 @@ export class BookmarksComponent implements OnInit {
     this.databaseLink = dataBaseLinkService;
     this.videoControl = videoControlService;
 
-    this.databaseLink.mockBookmarks$.subscribe((newBookmarks) => {
+    this.databaseLink.Bookmarks$.subscribe((newBookmarks) => {
       this.refreshBookmarks(newBookmarks);
     });
   }
@@ -32,14 +32,12 @@ export class BookmarksComponent implements OnInit {
   }
 
   userClick(videoUrl: string) {
-    this.videoControl.loadVideo(videoUrl, false);
+    this.videoControl.loadVideo(videoUrl);
   }
 
   addToBookmarks() {
-    const currentVideoUrl = this.videoControl.getVideoSource().toString();
-    console.log(currentVideoUrl);
+    const currentVideoUrl = this.videoControl.getVideoSource();
     this.databaseLink.addToBookmarks(currentVideoUrl);
-    console.log('user wants to add current video to  bookmarks');
   }
 
   refreshBookmarks(newBookmarks: string[]) {

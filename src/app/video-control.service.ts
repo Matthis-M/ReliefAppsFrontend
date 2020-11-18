@@ -11,28 +11,28 @@ export class VideoControlService {
   );
   private videoIdRegexp = new RegExp('watch\\?v=([A-Za-z0-9_-]{11})');
 
+  public defaultVideo = 'https://www.youtube.com/watch?v=AYRwF3SCalU';
+
   private videoSourceSource = new Subject<ɵSafeResourceUrl>();
 
-  private lastEntryVideo: string;
+  private videoSourceString = '';
 
   videoSource$ = this.videoSourceSource.asObservable();
 
   constructor(private domSanitizer: DomSanitizer) {}
 
-  public loadVideo(newVideoUrl: string, writeHistory: boolean) {
-    const videoUrlValidationResult = this.videoIdRegexp.exec(newVideoUrl);
+  public loadVideo(newVideoUrl: string) {
+    const videoUrlValidationResult = this.youtubeUrlRegexp.exec(newVideoUrl);
 
     if (videoUrlValidationResult) {
-      const videoId = videoUrlValidationResult[1];
+      this.videoSourceString = newVideoUrl;
+
+      const videoId = this.videoIdRegexp.exec(newVideoUrl)[1];
+
       const safeNewVideoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(
         'http://www.youtube.com/embed/' + videoId
       );
 
-      if (writeHistory) {
-        this.lastEntryVideo = newVideoUrl;
-      } else {
-        this.lastEntryVideo = '';
-      }
       this.videoSourceSource.next(safeNewVideoUrl);
     } else {
       window.alert(
@@ -42,6 +42,6 @@ export class VideoControlService {
   }
 
   public getVideoSource() {
-    return this.lastEntryVideo;
+    return this.videoSourceString;
   }
 }
