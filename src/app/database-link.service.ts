@@ -6,14 +6,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class DatabaseLinkService {
+  private bookmarksEndpoint = 'https://127.0.0.1:8000/bookmarks';
+  private historyEndpoint = 'https://127.0.0.1:8000/history';
+
   private HistorySource = new BehaviorSubject<string[]>([]);
   private BookmarksSource = new BehaviorSubject<string[]>([]);
 
-  History$ = this.HistorySource.asObservable();
-  Bookmarks$ = this.BookmarksSource.asObservable();
-
-  private bookmarksEndpoint = 'https://127.0.0.1:8000/bookmarks';
-  private historyEndpoint = 'https://127.0.0.1:8000/history';
+  public History$ = this.HistorySource.asObservable();
+  public Bookmarks$ = this.BookmarksSource.asObservable();
 
   constructor(private httpClient: HttpClient) {
     this.fetchBookmarks();
@@ -40,12 +40,11 @@ export class DatabaseLinkService {
 
   public addToBookmarks(videoUrl: string) {
     const isAlreadyBookmarked = this.BookmarksSource.getValue().find(
-      (url) => url === videoUrl
+      (url) => (url === videoUrl)
     );
 
     if (isAlreadyBookmarked) {
       alert('This video is already bookmarked !');
-
       return;
     }
 

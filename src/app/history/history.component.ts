@@ -10,7 +10,8 @@ import { VideoControlService } from '../video-control.service';
 export class HistoryComponent implements OnInit {
   private videoControl: VideoControlService;
   private databaseLink: DatabaseLinkService;
-  historyList = [];
+  
+  public historyList = [];
 
   constructor(
     databaseLinkService: DatabaseLinkService,
@@ -23,11 +24,11 @@ export class HistoryComponent implements OnInit {
       this.refreshHistory(newHistory);
     });
 
-    this.videoControl.videoSource$.subscribe((newSource) => {
+    this.videoControl.videoSource$.subscribe(() => {
 
       const newUrl = this.videoControl.getVideoSource();
       const isInHistory = this.historyList.find(
-        (url) => url === newUrl
+        (url) => (url === newUrl)
       );
 
       if(!isInHistory && newUrl !== this.videoControl.defaultVideo) {
