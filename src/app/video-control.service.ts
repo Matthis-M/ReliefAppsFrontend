@@ -10,14 +10,11 @@ export class VideoControlService {
     '^https?:\\/\\/(w{3}\\.)?youtube\\.com\\/watch\\?v=([A-Za-z0-9_-]{11})'
   );
   private videoIdRegexp = new RegExp('watch\\?v=([A-Za-z0-9_-]{11})');
-
   public defaultVideo = 'https://www.youtube.com/watch?v=AYRwF3SCalU';
-
   private videoSourceSource = new Subject<ɵSafeResourceUrl>();
-
   private videoSourceString = '';
 
-  videoSource$ = this.videoSourceSource.asObservable();
+  public videoSource$ = this.videoSourceSource.asObservable();
 
   constructor(private domSanitizer: DomSanitizer) {}
 

@@ -8,11 +8,10 @@ import { VideoControlService } from '../video-control.service';
   styleUrls: ['./bookmarks.component.scss'],
 })
 export class BookmarksComponent implements OnInit {
-
   private bookmarksListSelector = 'bookmarksList';
   private videoControl: VideoControlService;
   private databaseLink: DatabaseLinkService;
-  
+
   public toggleButtonText = 'Show bookmarks';
   public numberOfBookmarks: number;
   public bookmarksList = [];
