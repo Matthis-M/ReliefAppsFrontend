@@ -6,8 +6,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class DatabaseLinkService {
-  private bookmarksEndpoint = 'https://127.0.0.1:8000/bookmarks';
-  private historyEndpoint = 'https://127.0.0.1:8000/history';
+  private listBookmarksEndpoint = 'https://127.0.0.1:8000/listBookmarks';
+  private addBookmarkEndpoint = 'https://127.0.0.1:8000/addBookmark';
+  private listHistoryEndpoint = 'https://127.0.0.1:8000/listHistory';
+  private addHistoryEndpoint = 'https://127.0.0.1:8000/addHistory';
 
   private HistorySource = new BehaviorSubject<string[]>([]);
   private BookmarksSource = new BehaviorSubject<string[]>([]);
@@ -21,7 +23,7 @@ export class DatabaseLinkService {
   }
 
   public async fetchBookmarks() {
-    const request = this.httpClient.get(this.bookmarksEndpoint);
+    const request = this.httpClient.get(this.listBookmarksEndpoint);
     request.subscribe(
       (response: string) => {
         const updatedBookmarks = JSON.parse(response);
@@ -30,7 +32,7 @@ export class DatabaseLinkService {
       (error) => {
         console.log(
           'error: impossible to fetch data from "' +
-            this.bookmarksEndpoint +
+            this.listBookmarksEndpoint +
             '". Check the following error message for more information. Maybe try to reboot the server or check the CORS parameters.'
         );
         console.log(error);
@@ -53,7 +55,7 @@ export class DatabaseLinkService {
         videoUrl: videoUrl,
       };
 
-      this.httpClient.post(this.bookmarksEndpoint, JsonData).subscribe(
+      this.httpClient.post(this.addBookmarkEndpoint, JsonData).subscribe(
         (response: string) => {
           console.log(response);
         },
@@ -65,7 +67,7 @@ export class DatabaseLinkService {
   }
 
   public async fetchHistory() {
-    const request = this.httpClient.get(this.historyEndpoint);
+    const request = this.httpClient.get(this.listHistoryEndpoint);
     request.subscribe(
       (response: string) => {
         const updatedHistory = JSON.parse(response);
@@ -74,7 +76,7 @@ export class DatabaseLinkService {
       (error) => {
         console.log(
           'error during the api call to "' +
-            this.historyEndpoint +
+            this.listHistoryEndpoint +
             '". Check the following error message for more informations. Maybe check your CORS parameters.'
         );
         console.log(error);
@@ -90,7 +92,7 @@ export class DatabaseLinkService {
         videoUrl: videoUrl,
       };
 
-      this.httpClient.post(this.historyEndpoint, JsonData).subscribe(
+      this.httpClient.post(this.addHistoryEndpoint, JsonData).subscribe(
         (response: string) => {
           console.log(response);
         },
