@@ -1,22 +1,6 @@
 @import "../../assets/variables.scss";
 
-button {
-  background-color: $light-red;
-  border-radius: $border-radius;
-  border: none;
-  color: white;
-  display: block;
-  font-size: 20px;
-  margin: 0 auto;
-  padding: 2px 8px;
-  transition: 250ms;
 
-  &:hover {
-    cursor: pointer;
-    background: white;
-    color: $dark-grey;
-  }
-}
 
 #toggleBookmarksButton {
   margin: 24px auto;

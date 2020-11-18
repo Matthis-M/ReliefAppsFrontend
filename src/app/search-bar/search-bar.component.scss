@@ -1,9 +1,20 @@
 @import "../../assets/variables.scss";
 
-.searchBar {
-  font-size: 16px;
+.searchContainer {
+  display: flex;
   height: 42px;
-  margin: 2% 10%;
-  text-align: center;
-  width: 80%;
+  margin: 21px 5%;
+  width: 100%;
+
+  .searchBar {
+    font-size: 16px;
+    margin: 0 1%;
+    text-align: center;
+    width: 70%;
+  }
+
+  .searchButton {
+    margin: 0 1%;
+    width: 16%;
+  }
 }
