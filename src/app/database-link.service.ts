@@ -10,6 +10,7 @@ export class DatabaseLinkService {
   private addBookmarkEndpoint = 'https://127.0.0.1:8000/addBookmark';
   private listHistoryEndpoint = 'https://127.0.0.1:8000/listHistory';
   private addHistoryEndpoint = 'https://127.0.0.1:8000/addHistory';
+  private clearAllEndpoint = 'https://127.0.0.1:8000/clearAll';
 
   private HistorySource = new BehaviorSubject<string[]>([]);
   private BookmarksSource = new BehaviorSubject<string[]>([]);
@@ -101,5 +102,18 @@ export class DatabaseLinkService {
         }
       );
     }
+  }
+
+  public clearAll() {
+    this.httpClient.get(this.clearAllEndpoint).subscribe(
+      (response: string) => {
+        console.log(response);
+      },
+      () => {
+        window.alert("The data has been cleared.");
+        this.fetchBookmarks();
+        this.fetchHistory();
+      }
+    );
   }
 }

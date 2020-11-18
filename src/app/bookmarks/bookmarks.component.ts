@@ -54,4 +54,11 @@ export class BookmarksComponent implements OnInit {
       ? (this.toggleButtonText = 'Hide bookmarks')
       : (this.toggleButtonText = 'Show bookmarks');
   }
+
+  clearAll() {
+    const choice = window.confirm(
+      'Do you really want to reset History and Bookmarks ? This action is irreversible'
+    );
+    this.databaseLink.clearAll();
+  }
 }
