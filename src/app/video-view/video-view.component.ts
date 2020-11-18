@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { SafeResourceUrl } from '@angular/platform-browser';
 import { VideoControlService } from '../video-control.service';
 
 @Component({
@@ -11,12 +11,9 @@ export class VideoViewComponent implements OnInit {
   private videoControl: VideoControlService;
   private videoRatio = 9 / 16;
   private videoPlayer: HTMLElement;
-  videoSource: SafeResourceUrl;
+  public videoSource: SafeResourceUrl;
 
-  constructor(
-    private domSanitizer: DomSanitizer,
-    private videoControlService: VideoControlService
-  ) {
+  constructor(private videoControlService: VideoControlService) {
     this.videoControl = videoControlService;
 
     this.videoControl.videoSource$.subscribe((newSource) => {
@@ -25,10 +22,7 @@ export class VideoViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.videoControl.loadVideo(
-      'https://www.youtube.com/watch?v=AYRwF3SCalU',
-      false
-    );
+    this.videoControl.loadVideo(this.videoControl.defaultVideo);
     this.videoPlayer = document.getElementById('videoPlayer');
     this.setVideoHeight();
   }

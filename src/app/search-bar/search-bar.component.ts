@@ -16,6 +16,6 @@ export class SearchBarComponent implements OnInit {
   ngOnInit(): void {}
 
   onEnter(userInput: string) {
-    this.videoControl.loadVideo(userInput, true);
+    this.videoControl.loadVideo(userInput);
   }
 }
