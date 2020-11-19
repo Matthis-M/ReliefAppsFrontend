@@ -8,6 +8,8 @@
 
 #bookmarksList {
   max-height: 0;
+
+  // All the following rules are for a CSS-only toggling animation
   overflow-y: scroll;
   overflow: hidden;
   transition: 250ms;

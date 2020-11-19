@@ -15,6 +15,7 @@ export class SearchBarComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  // Asks the video control service to load the video. It's the only role of the searchBar
   loadVideo(userInput: string) {
     this.videoControl.loadVideo(userInput);
   }
