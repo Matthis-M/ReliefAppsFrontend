@@ -2,24 +2,19 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
 
-## Prerequisites
-
-* NodeJs & npm installed
->Developped and tested under NodeJS version v15.2.1 & npm v7.0.8
-
-
-* Angular installed
->Developped and tested under version "Ivy"
-
-
-* Angular CLI installed (optional but recommended)
->Developped and tested under v10.2.0
-
 
 ## Setting up the application
 
-1. Clone this Git repository
-2. Inside the folder, run ```ng serve``` to start the application in development mode. It will be accessible at the address ```http://localhost:4200/```
+Installation for Debian 10.4. For other operating systems, please consult the related documentations.
+If Git, NodeJS, npm and Angular CLI are already installed, you can skip to step 4. However, make sure to have recent enough versions.
+
+1. Install Git with ```sudo apt-get install git```
+2. Install NodeJS and npm latest version by doing : ```sudo curl -sL https://deb.nodesource.com/setup_15.x | sudo bash -``` then ```sudo apt-get install -y nodejs```
+3. Install angular CLI in a global scope with ```sudo npm install -g @angular/cli```
+4. Clone this Git repository with the [following link](https://github.com/Matthis-M/ReliefAppsFrontend.git)
+5. Move inside the folder and run ```npm install```
+6. Install the [following Symfony project](https://github.com/Matthis-M/ReliefAppsBackend) to expose the backend services needed to this application to work
+7. Inside the folder, run ```ng serve``` to start the application in development mode. It will be accessible at the address ```http://localhost:4200/```
 
 ### Troubleshooting
 
