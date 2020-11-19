@@ -4,11 +4,17 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Prerequisites
 
-NodeJs & npm installed
+* NodeJs & npm installed
+>Developped and tested under NodeJS version v15.2.1 & npm v7.0.8
 
-Angular installed
 
-Angular CLI installed (optional but recommended)
+* Angular installed
+>Developped and tested under version "Ivy"
+
+
+* Angular CLI installed (optional but recommended)
+>Developped and tested under v10.2.0
+
 
 ## Development server
 
