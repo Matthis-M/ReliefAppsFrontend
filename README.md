@@ -16,9 +16,13 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 >Developped and tested under v10.2.0
 
 
-## Development server
+## Setting up the application
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
+1. Clone this Git repository
+2. Inside the folder, run ```ng serve``` to start the application in development mode. It will be accessible at the address ```http://localhost:4200/```
+
+### Troubleshooting
+
 If a message similar to "Error: ENOSPC: System limit for number of file watchers reached" is displayed, the cause probably is the limite of file watchers of your Linux system.
 
 You can check this limit with : `echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`
