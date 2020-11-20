@@ -39,3 +39,9 @@ $ sudo sysctl -p
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
+
+## Class Diagram
+
+Here is the UML class diagram of the application to offer a better overview of its structure :
+
+![Application UML Class Diagram](https://github.com/Matthis-M/ReliefAppsFrontend/blob/main/Angular_ReliefApps_Frontend_Class_Diagram.png)
